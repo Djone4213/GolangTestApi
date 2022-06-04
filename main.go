@@ -2,9 +2,19 @@ package main
 
 import (
 	"net/http"
-	"log"
+	// "log"
 	"encoding/json"
+	 "fmt"
 )
+
+type tItem struct{
+	Id string
+	Name string
+}
+
+type tResponse struct{
+	Items []tItem 
+}
 
 const cUrl = "https://api.hh.ru/vacancies"
 
@@ -22,13 +32,19 @@ func makeRequest() {
   
     resp, err := client.Do(req) 
     if err != nil { 
-        log.Println(err) 
+        fmt.Println(err) 
         return
     } 
     defer resp.Body.Close() 
-	var result map[string]interface{
-	}
+
+	var result tResponse
+	
 	json.NewDecoder(resp.Body).Decode(&result)
-	log.Println(result["items"])
+
+	for key, val := range result.Items {
+		fmt.Printf("%d %s\n",key + 1, val.Name)
+	}
 	
 }
+
+
