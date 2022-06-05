@@ -68,7 +68,7 @@ func getSkillsVacancie(id string) (string, error) {
 	for _, val := range itemInfo.Key_skills {
 		result += val.Name + ","
 	}
-	
+
 	if result != "" {
 		result = result[:len(result) - 1]
 	}
@@ -110,11 +110,7 @@ func main() {
 			
 			break
 		}
-
 	}
-	
-
-	
 }
 
 
